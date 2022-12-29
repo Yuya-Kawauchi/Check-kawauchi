@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+ <head>
+ <meta charset="utf-8">
+ <title>銘柄一覧</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ </head>
+<body>
+
+  <form th:action="@{/Beanslist}"  th:object="${BeansList}" method="POST">
+	<button formaction="/Beanslist" name="new">新規作成</button>
+	  </form>
+	  
+  <div class="contents">
+      <h1>銘柄一覧</h1>
+      
+    <div class="warapper">
+    <table>
+      <thead>
+        <tr class="item-name">
+          <th>No.</th>
+          <th>銘柄</th>
+          <th>100ｇ</th>
+          <th>200ｇ</th>
+          <th>喫茶/Togo</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody  class="record">
+        <tr th:each="BeansList,s:${BeansList}" class="record">
+          <td th:text="${s.count}"></td>
+          <td ><span th:text="${BeansList.farm}">円</span><span>  </span><span th:text="${BeansList.name}"></span></td>
+          <td><span th:text="${BeansList.smallsize}"></span><span>円</span></td>
+          <td><span th:text="${BeansList.mediumsize}"></span><span>円</span></td>
+           <td><span th:text="${BeansList.drink}"></span><span>円</span></td>
+          <td>
+            <form th:action="@{/Beanslist}" method="post">
+                <button name="edit">編集</button>
+                <input type="hidden" name="id" th:value="${BeansList.id}">
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/Beanslist}" method="post">
+              <button  name="delete">削除</button>
+                <input type="hidden" name="id" th:value="${BeansList.id}">
+            </form>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+
+</html>
